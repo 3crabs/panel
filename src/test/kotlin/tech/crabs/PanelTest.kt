@@ -14,7 +14,7 @@ class PanelTest : StringSpec() {
     lateinit var roleClient: RoleClient
 
     init {
-        "Получение списка ролей с 0 элементов" {
+        "Получение списка ролей без элементов" {
             roleClient.getAllRoles().size shouldBe 0
         }
 
