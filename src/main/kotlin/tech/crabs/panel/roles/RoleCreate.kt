@@ -2,7 +2,7 @@ package tech.crabs.panel.roles
 
 import io.swagger.v3.oas.annotations.media.Schema
 
-@Schema(description = "Роль пользователя внешней системы (создание)")
+@Schema(description = "Роль (создание)")
 data class RoleCreate(
 
     /**

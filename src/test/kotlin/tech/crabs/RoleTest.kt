@@ -15,7 +15,7 @@ import tech.crabs.panel.roles.RoleUpdate
 import javax.inject.Inject
 
 @MicronautTest
-class PanelTest : StringSpec() {
+class RoleTest : StringSpec() {
 
     @Inject
     lateinit var roleClient: RoleClient

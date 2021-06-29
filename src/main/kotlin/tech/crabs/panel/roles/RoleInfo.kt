@@ -3,7 +3,7 @@ package tech.crabs.panel.roles
 import io.swagger.v3.oas.annotations.media.Schema
 import java.time.LocalDateTime
 
-@Schema(description = "Роль пользователя внешней системы")
+@Schema(description = "Роль")
 data class RoleInfo(
 
     /**
