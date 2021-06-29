@@ -1,11 +1,9 @@
 package tech.crabs.panel.roles
 
-import io.micronaut.http.annotation.Controller
-import io.micronaut.http.annotation.Get
-import io.micronaut.http.annotation.Post
+import io.micronaut.http.annotation.*
 import javax.inject.Inject
 
-@Controller("/roles")
+@Controller(value = "/roles")
 class RoleController {
 
     @Inject
@@ -16,4 +14,13 @@ class RoleController {
 
     @Post
     fun createRole(role: RoleCreate) = roleService.createRole(role)
+
+    @Get(value = "/{code}")
+    fun getRoleByCode(code: String) = roleService.getRoleByCode(code)
+
+    @Put(value = "/{code}")
+    fun updateRole(code: String, role: RoleUpdate) = roleService.updateRole(code, role)
+
+    @Delete(value = "/{code}")
+    fun deleteRoleByCode(code: String) = roleService.deleteRoleByCode(code)
 }

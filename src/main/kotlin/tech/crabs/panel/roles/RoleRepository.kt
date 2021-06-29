@@ -5,4 +5,7 @@ import io.micronaut.data.model.query.builder.sql.Dialect
 import io.micronaut.data.repository.CrudRepository
 
 @JdbcRepository(dialect = Dialect.H2)
-interface RoleRepository : CrudRepository<RoleEntity, String>
+interface RoleRepository : CrudRepository<RoleEntity, String> {
+
+    fun findByCode(code: String): RoleEntity?
+}
