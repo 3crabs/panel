@@ -29,14 +29,14 @@ class PanelTest : StringSpec() {
         }
 
         "Создание роли code 1" {
-            val r = roleClient.createRole(RoleCreate("code 1", "name 1"))
+            val r = roleClient.createRole(RoleCreate(" code 1 ", " name 1 "))
             r.name shouldBe "name 1"
             r.code shouldBe "code 1"
             r.created.shouldNotBeNull()
         }
 
         "Создание роли code 2" {
-            val r = roleClient.createRole(RoleCreate("code 2", "name 2"))
+            val r = roleClient.createRole(RoleCreate(" code 2 ", " name 2 "))
             r.name shouldBe "name 2"
             r.code shouldBe "code 2"
             r.created.shouldNotBeNull()
@@ -44,28 +44,14 @@ class PanelTest : StringSpec() {
 
         "Попытка создание роли с кодом который уже существует заканчивается ошибкой" {
             val e =
-                shouldThrow<HttpClientResponseException> { roleClient.createRole(RoleCreate("code 1", "name")) }
-            e.status shouldBe HttpStatus.BAD_REQUEST
-            e.message.shouldContain("code is already in use")
-        }
-
-        "Попытка создание роли с кодом который уже существует заканчивается ошибкой (Пустые символы)" {
-            val e =
-                shouldThrow<HttpClientResponseException> { roleClient.createRole(RoleCreate("code 1 ", "name")) }
+                shouldThrow<HttpClientResponseException> { roleClient.createRole(RoleCreate(" code 1 ", "name")) }
             e.status shouldBe HttpStatus.BAD_REQUEST
             e.message.shouldContain("code is already in use")
         }
 
         "Попытка создание роли с именем которое уже существует заканчивается ошибкой" {
             val e =
-                shouldThrow<HttpClientResponseException> { roleClient.createRole(RoleCreate("code", "name 1")) }
-            e.status shouldBe HttpStatus.BAD_REQUEST
-            e.message.shouldContain("name is already in use")
-        }
-
-        "Попытка создание роли с именем которое уже существует заканчивается ошибкой (Пустые символы)" {
-            val e =
-                shouldThrow<HttpClientResponseException> { roleClient.createRole(RoleCreate("code", "name 1 ")) }
+                shouldThrow<HttpClientResponseException> { roleClient.createRole(RoleCreate("code", " name 1 ")) }
             e.status shouldBe HttpStatus.BAD_REQUEST
             e.message.shouldContain("name is already in use")
         }
@@ -88,7 +74,7 @@ class PanelTest : StringSpec() {
         }
 
         "Редактирование роли" {
-            var r = roleClient.updateRole("code 1", RoleUpdate("name 1 new "))
+            var r = roleClient.updateRole("code 1", RoleUpdate(" name 1 new "))
             r.name shouldBe "name 1 new"
             r.code shouldBe "code 1"
             r.created.shouldNotBeNull()
@@ -107,33 +93,33 @@ class PanelTest : StringSpec() {
 
         "Попытка присвоения роли имени которое уже есть в базе заканчивается ошибкой" {
             val e =
-                shouldThrow<HttpClientResponseException> { roleClient.updateRole("code 2", RoleUpdate("name 1 new")) }
+                shouldThrow<HttpClientResponseException> { roleClient.updateRole("code 2", RoleUpdate(" name 1 new ")) }
             e.status shouldBe HttpStatus.BAD_REQUEST
             e.message shouldBe "name is already in use"
         }
 
-        "Удаление роли code 1" {
+        "Присвоение роли своего же имени" {
+            val r = roleClient.updateRole("code 2", RoleUpdate(" name 2 "))
+            r.name shouldBe "name 2"
+            r.code shouldBe "code 2"
+            r.created.shouldNotBeNull()
+        }
+
+        "Удаление роли code 1"{
             val r = roleClient.deleteRoleByCode("code 1")
             r.name shouldBe "name 1 new"
             r.code shouldBe "code 1"
             r.created.shouldNotBeNull()
         }
 
-        "Попытка получение роли по коду удаленной роли заканчивается ошибкой" {
-            val e = shouldThrow<HttpClientResponseException> { roleClient.getRoleByCode("code 1") }
+        "Попытка удаление роли по коду которого нет в базе заканчивается ошибкой"{
+            val e = shouldThrow<HttpClientResponseException> { roleClient.getRoleByCode("bad_code") }
             e.status shouldBe HttpStatus.BAD_REQUEST
             e.message shouldBe "role not found"
         }
 
-        "Получение списка ролей с 1 элементом" {
+        "Получение списка ролей с 1 элементом"{
             roleClient.getAllRoles().size shouldBe 1
-        }
-
-        "Создание роли (Чистка от пустые символы)" {
-            val r = roleClient.createRole(RoleCreate("code ", "name "))
-            r.name shouldBe "name"
-            r.code shouldBe "code"
-            r.created.shouldNotBeNull()
         }
     }
 

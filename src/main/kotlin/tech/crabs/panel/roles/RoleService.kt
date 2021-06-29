@@ -29,8 +29,9 @@ class RoleService {
 
     fun updateRole(code: String, role: RoleUpdate): RoleInfo {
         val r = roleRepository.findByCode(code) ?: throw badRequest("role not found")
-        roleRepository.findByName(role.name)?.let { throw badRequest("name is already in use") }
-        r.name = role.name.trim()
+        val name = role.name.trim()
+        roleRepository.findByCodeNotEqualAndName(code, name)?.let { throw badRequest("name is already in use") }
+        r.name = name
         return roleConverter.convert(roleRepository.update(r))
     }
 

@@ -10,4 +10,7 @@ interface RoleRepository : CrudRepository<RoleEntity, String> {
     fun findByCode(code: String): RoleEntity?
 
     fun findByName(name: String): RoleEntity?
+
+    @Suppress("MicronautDataMethodInconsistencyInspection") // не знаю почему ловит предупреждения
+    fun findByCodeNotEqualAndName(code: String, name: String): RoleEntity?
 }
