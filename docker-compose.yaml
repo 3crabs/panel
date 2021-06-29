@@ -1,0 +1,17 @@
+version: "3.3"
+
+services:
+
+  panel:
+    container_name: panel
+    build:
+      context: .
+      dockerfile: Dockerfile
+    restart: always
+    command: java -Dcom.sun.management.jmxremote -Xmx256m -jar app.jar
+    environment:
+      JDBC_URL: "jdbc:h2:/var/panel_db"
+      JDBC_USER: "admin"
+      JDBC_PASSWORD: "admin"
+    ports:
+      - 8080:8080
