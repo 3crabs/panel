@@ -1,6 +1,6 @@
-package tech.crabs
+package tech.crabs.panel
 
-import io.micronaut.runtime.Micronaut.*
+import io.micronaut.runtime.Micronaut.build
 
 fun main(args: Array<String>) {
     build()
@@ -8,4 +8,3 @@ fun main(args: Array<String>) {
         .packages("tech.crabs")
         .start()
 }
-

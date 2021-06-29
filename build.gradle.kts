@@ -35,11 +35,18 @@ dependencies {
 
     runtimeOnly("com.fasterxml.jackson.module:jackson-module-kotlin")
 
+    kapt("io.micronaut.data:micronaut-data-processor")
+    implementation("io.micronaut.sql:micronaut-jdbc-hikari")
+    implementation("io.micronaut.data:micronaut-data-jdbc")
+    implementation("io.micronaut.sql:micronaut-hibernate-jpa")
+    runtimeOnly("com.h2database:h2")
+
+    implementation("io.micronaut.flyway:micronaut-flyway")
 }
 
 
 application {
-    mainClass.set("tech.crabs.ApplicationKt")
+    mainClass.set("tech.crabs.panel.ApplicationKt")
 }
 java {
     sourceCompatibility = JavaVersion.toVersion("11")
@@ -56,6 +63,4 @@ tasks {
             jvmTarget = "11"
         }
     }
-
-
 }

@@ -1,4 +1,4 @@
-package tech.crabs.roles
+package tech.crabs.panel.roles
 
 /**
  * роль пользователя внешней системы

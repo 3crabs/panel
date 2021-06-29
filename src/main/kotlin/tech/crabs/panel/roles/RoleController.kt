@@ -1,4 +1,4 @@
-package tech.crabs.roles
+package tech.crabs.panel.roles
 
 import io.micronaut.http.annotation.Controller
 import io.micronaut.http.annotation.Get

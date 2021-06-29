@@ -1,4 +1,4 @@
-package tech.crabs.roles
+package tech.crabs.panel.roles
 
 import java.time.LocalDateTime
 

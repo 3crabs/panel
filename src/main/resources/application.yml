@@ -1,3 +1,25 @@
 micronaut:
   application:
     name: panel
+
+datasources:
+  default:
+    url: ${JDBC_URL:`jdbc:h2:~/panel_db`}
+    username: ${JDBC_USER:`user`}
+    password: ${JDBC_PASSWORD:`password`}
+    driverClassName: ${JDBC_DRIVER:org.h2.Driver}
+
+jpa:
+  default:
+    entity-scan:
+      packages: 'tech.crabs.panel'
+    properties:
+      hibernate:
+        hbm2ddl:
+          auto: none
+        show_sql: true
+
+flyway:
+  datasources:
+    default:
+      enabled: true
