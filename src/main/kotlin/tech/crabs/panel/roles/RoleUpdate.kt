@@ -1,13 +1,12 @@
 package tech.crabs.panel.roles
 
-/**
- * роль пользователя внешней системы
- */
+import io.swagger.v3.oas.annotations.media.Schema
+
+@Schema(description = "Роль пользователя внешней системы (редактирование)")
 data class RoleUpdate(
 
     /**
-     * название роли
-     * уникально
+     * название роли (уникально)
      */
     val name: String
 )

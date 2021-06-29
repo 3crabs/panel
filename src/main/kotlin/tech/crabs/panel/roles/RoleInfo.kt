@@ -1,21 +1,18 @@
 package tech.crabs.panel.roles
 
+import io.swagger.v3.oas.annotations.media.Schema
 import java.time.LocalDateTime
 
-/**
- * роль пользователя внешней системы
- */
+@Schema(description = "Роль пользователя внешней системы")
 data class RoleInfo(
 
     /**
-     * код роли
-     * уникально
+     * код роли (уникально)
      */
     val code: String,
 
     /**
-     * название роли
-     * уникально
+     * название роли (уникально)
      */
     val name: String,
 

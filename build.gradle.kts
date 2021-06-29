@@ -42,11 +42,14 @@ dependencies {
     runtimeOnly("com.h2database:h2")
 
     implementation("io.micronaut.flyway:micronaut-flyway")
+
+    kapt("io.micronaut.openapi:micronaut-openapi:2.3.1")
+    implementation("io.swagger.core.v3:swagger-annotations")
 }
 
 
 application {
-    mainClass.set("tech.crabs.panel.ApplicationKt")
+    mainClass.set("tech.crabs.panel.Application")
 }
 java {
     sourceCompatibility = JavaVersion.toVersion("11")
@@ -62,5 +65,11 @@ tasks {
         kotlinOptions {
             jvmTarget = "11"
         }
+    }
+}
+
+kapt {
+    arguments {
+        arg("micronaut.openapi.views.spec", "swagger-ui.enabled=true")
     }
 }
