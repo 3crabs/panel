@@ -23,5 +23,10 @@ class PermissionService {
         return permissionConverter.convert(permissionRepository.save(permissionConverter.convert(permission)))
     }
 
+    fun getPermissionByCode(code: String): PermissionInfo {
+        val p = permissionRepository.findByCode(code) ?: throw badRequest("permission not found")
+        return permissionConverter.convert(p)
+    }
+
     private fun badRequest(message: String) = HttpStatusException(HttpStatus.BAD_REQUEST, message)
 }

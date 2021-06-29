@@ -56,6 +56,17 @@ class PermissionTest : StringSpec() {
             e.status shouldBe HttpStatus.BAD_REQUEST
             e.message.shouldContain("name is already in use")
         }
+
+        "Получение списка разрешений с 2 элементами" {
+            permissionClient.getAllPermissions().size shouldBe 2
+        }
+
+        "Получение разрешения по коду" {
+            val p = permissionClient.getPermissionByCode("code 1")
+            p.name shouldBe "name 1"
+            p.code shouldBe "code 1"
+            p.created.shouldNotBeNull()
+        }
     }
 
     override fun afterSpec(spec: Spec) {

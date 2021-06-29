@@ -14,4 +14,7 @@ interface PermissionClient {
 
     @Post
     fun createPermission(permission: PermissionCreate): PermissionInfo
+
+    @Get(value = "/{code}")
+    fun getPermissionByCode(code: String): PermissionInfo
 }

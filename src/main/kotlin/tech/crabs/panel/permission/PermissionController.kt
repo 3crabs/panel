@@ -19,4 +19,8 @@ class PermissionController {
     @Post
     @Operation(summary = "Создание разрешения")
     fun createPermission(permission: PermissionCreate) = permissionService.createPermission(permission)
+
+    @Get(value = "/{code}")
+    @Operation(summary = "Получение разрешения по коду")
+    fun getPermissionByCode(code: String): PermissionInfo = permissionService.getPermissionByCode(code)
 }
