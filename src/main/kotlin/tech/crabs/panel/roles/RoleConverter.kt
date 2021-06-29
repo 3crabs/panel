@@ -8,8 +8,8 @@ import javax.inject.Singleton
 class RoleConverter {
 
     fun convert(o: RoleCreate) = RoleEntity(
-        o.code,
-        o.name,
+        o.code.trim(),
+        o.name.trim(),
         LocalDateTime.now(Clock.systemUTC())
     )
 

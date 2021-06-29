@@ -8,4 +8,6 @@ import io.micronaut.data.repository.CrudRepository
 interface RoleRepository : CrudRepository<RoleEntity, String> {
 
     fun findByCode(code: String): RoleEntity?
+
+    fun findByName(name: String): RoleEntity?
 }

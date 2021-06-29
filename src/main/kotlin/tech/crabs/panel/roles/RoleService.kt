@@ -17,7 +17,8 @@ class RoleService {
     fun getAllRoles() = roleRepository.findAll().map { roleConverter.convert(it) }
 
     fun createRole(role: RoleCreate): RoleInfo {
-        roleRepository.findByCode(role.code)?.let { throw badRequest("code is already in use") }
+        roleRepository.findByCode(role.code.trim())?.let { throw badRequest("code is already in use") }
+        roleRepository.findByName(role.name.trim())?.let { throw badRequest("name is already in use") }
         return roleConverter.convert(roleRepository.save(roleConverter.convert(role)))
     }
 
@@ -28,7 +29,8 @@ class RoleService {
 
     fun updateRole(code: String, role: RoleUpdate): RoleInfo {
         val r = roleRepository.findByCode(code) ?: throw badRequest("role not found")
-        r.name = role.name
+        roleRepository.findByName(role.name)?.let { throw badRequest("name is already in use") }
+        r.name = role.name.trim()
         return roleConverter.convert(roleRepository.update(r))
     }
 
