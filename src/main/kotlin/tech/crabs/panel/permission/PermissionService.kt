@@ -28,5 +28,19 @@ class PermissionService {
         return permissionConverter.convert(p)
     }
 
+    fun updatePermission(code: String, permission: PermissionUpdate): PermissionInfo {
+        val r = permissionRepository.findByCode(code) ?: throw badRequest("permission not found")
+        val name = permission.name.trim()
+        permissionRepository.findByCodeNotEqualAndName(code, name)?.let { throw badRequest("name is already in use") }
+        r.name = name
+        return permissionConverter.convert(permissionRepository.update(r))
+    }
+
+    fun deletePermissionByCode(code: String): PermissionInfo {
+        val r = permissionRepository.findByCode(code) ?: throw badRequest("permission not found")
+        permissionRepository.delete(r)
+        return permissionConverter.convert(r)
+    }
+
     private fun badRequest(message: String) = HttpStatusException(HttpStatus.BAD_REQUEST, message)
 }

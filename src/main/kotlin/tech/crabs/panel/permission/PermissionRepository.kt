@@ -10,4 +10,7 @@ interface PermissionRepository : CrudRepository<PermissionEntity, String> {
     fun findByCode(code: String): PermissionEntity?
 
     fun findByName(name: String): PermissionEntity?
+
+    @Suppress("MicronautDataMethodInconsistencyInspection")
+    fun findByCodeNotEqualAndName(code: String, name: String): PermissionEntity?
 }

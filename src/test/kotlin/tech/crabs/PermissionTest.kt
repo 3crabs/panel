@@ -11,6 +11,7 @@ import io.micronaut.http.client.exceptions.HttpClientResponseException
 import io.micronaut.test.extensions.kotest.annotation.MicronautTest
 import tech.crabs.panel.permission.PermissionCreate
 import tech.crabs.panel.permission.PermissionRepository
+import tech.crabs.panel.permission.PermissionUpdate
 import javax.inject.Inject
 
 @MicronautTest
@@ -66,6 +67,67 @@ class PermissionTest : StringSpec() {
             p.name shouldBe "name 1"
             p.code shouldBe "code 1"
             p.created.shouldNotBeNull()
+        }
+
+        "Попытка получение разрешения по коду которого нет в базе заканчивается ошибкой" {
+            val e = shouldThrow<HttpClientResponseException> {
+                permissionClient.getPermissionByCode("bad_code")
+            }
+            e.status shouldBe HttpStatus.BAD_REQUEST
+            e.message shouldBe "permission not found"
+        }
+
+        "Редактирование разрешения" {
+            var p = permissionClient.updatePermission("code 1", PermissionUpdate(" name 1 new "))
+            p.name shouldBe "name 1 new"
+            p.code shouldBe "code 1"
+            p.created.shouldNotBeNull()
+            p = permissionClient.getPermissionByCode("code 1")
+            p.name shouldBe "name 1 new"
+            p.code shouldBe "code 1"
+            p.created.shouldNotBeNull()
+        }
+
+        "Попытка редактирования разрешения по коду которого нет в базе заканчивается ошибкой" {
+            val e = shouldThrow<HttpClientResponseException> {
+                permissionClient.updatePermission("bad_code", PermissionUpdate("name"))
+            }
+            e.status shouldBe HttpStatus.BAD_REQUEST
+            e.message shouldBe "permission not found"
+        }
+
+        "Попытка присвоения разрешению имени которое уже есть в базе заканчивается ошибкой" {
+            val e = shouldThrow<HttpClientResponseException> {
+                permissionClient.updatePermission("code 2", PermissionUpdate(" name 1 new "))
+            }
+            e.status shouldBe HttpStatus.BAD_REQUEST
+            e.message shouldBe "name is already in use"
+        }
+
+        "Присвоение разрешению своего же имени" {
+            val p = permissionClient.updatePermission("code 2", PermissionUpdate(" name 2 "))
+            p.name shouldBe "name 2"
+            p.code shouldBe "code 2"
+            p.created.shouldNotBeNull()
+        }
+
+        "Удаление разрешения code 1"{
+            val p = permissionClient.deletePermissionByCode("code 1")
+            p.name shouldBe "name 1 new"
+            p.code shouldBe "code 1"
+            p.created.shouldNotBeNull()
+        }
+
+        "Попытка удаление разрешения по коду которого нет в базе заканчивается ошибкой"{
+            val e = shouldThrow<HttpClientResponseException> {
+                permissionClient.deletePermissionByCode("bad_code")
+            }
+            e.status shouldBe HttpStatus.BAD_REQUEST
+            e.message shouldBe "permission not found"
+        }
+
+        "Получение списка разрешений с 1 элементом"{
+            permissionClient.getAllPermissions().size shouldBe 1
         }
     }
 

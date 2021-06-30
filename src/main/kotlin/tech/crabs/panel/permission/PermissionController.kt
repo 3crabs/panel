@@ -23,4 +23,13 @@ class PermissionController {
     @Get(value = "/{code}")
     @Operation(summary = "Получение разрешения по коду")
     fun getPermissionByCode(code: String): PermissionInfo = permissionService.getPermissionByCode(code)
+
+    @Put(value = "/{code}")
+    @Operation(summary = "Редактирование разрешения по коду")
+    fun updatePermission(code: String, permission: PermissionUpdate) =
+        permissionService.updatePermission(code, permission)
+
+    @Delete(value = "/{code}")
+    @Operation(summary = "Удаление разрешения по коду")
+    fun deletePermissionByCode(code: String) = permissionService.deletePermissionByCode(code)
 }

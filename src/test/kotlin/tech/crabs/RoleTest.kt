@@ -43,15 +43,17 @@ class RoleTest : StringSpec() {
         }
 
         "Попытка создание роли с кодом который уже существует заканчивается ошибкой" {
-            val e =
-                shouldThrow<HttpClientResponseException> { roleClient.createRole(RoleCreate(" code 1 ", "name")) }
+            val e = shouldThrow<HttpClientResponseException> {
+                roleClient.createRole(RoleCreate(" code 1 ", "name"))
+            }
             e.status shouldBe HttpStatus.BAD_REQUEST
             e.message.shouldContain("code is already in use")
         }
 
         "Попытка создание роли с именем которое уже существует заканчивается ошибкой" {
-            val e =
-                shouldThrow<HttpClientResponseException> { roleClient.createRole(RoleCreate("code", " name 1 ")) }
+            val e = shouldThrow<HttpClientResponseException> {
+                roleClient.createRole(RoleCreate("code", " name 1 "))
+            }
             e.status shouldBe HttpStatus.BAD_REQUEST
             e.message.shouldContain("name is already in use")
         }
@@ -68,7 +70,9 @@ class RoleTest : StringSpec() {
         }
 
         "Попытка получение роли по коду которого нет в базе заканчивается ошибкой" {
-            val e = shouldThrow<HttpClientResponseException> { roleClient.getRoleByCode("bad_code") }
+            val e = shouldThrow<HttpClientResponseException> {
+                roleClient.getRoleByCode("bad_code")
+            }
             e.status shouldBe HttpStatus.BAD_REQUEST
             e.message shouldBe "role not found"
         }
@@ -85,15 +89,17 @@ class RoleTest : StringSpec() {
         }
 
         "Попытка редактирования роли по коду которого нет в базе заканчивается ошибкой" {
-            val e =
-                shouldThrow<HttpClientResponseException> { roleClient.updateRole("bad_code", RoleUpdate("name")) }
+            val e = shouldThrow<HttpClientResponseException> {
+                roleClient.updateRole("bad_code", RoleUpdate("name"))
+            }
             e.status shouldBe HttpStatus.BAD_REQUEST
             e.message shouldBe "role not found"
         }
 
         "Попытка присвоения роли имени которое уже есть в базе заканчивается ошибкой" {
-            val e =
-                shouldThrow<HttpClientResponseException> { roleClient.updateRole("code 2", RoleUpdate(" name 1 new ")) }
+            val e = shouldThrow<HttpClientResponseException> {
+                roleClient.updateRole("code 2", RoleUpdate(" name 1 new "))
+            }
             e.status shouldBe HttpStatus.BAD_REQUEST
             e.message shouldBe "name is already in use"
         }
@@ -113,7 +119,9 @@ class RoleTest : StringSpec() {
         }
 
         "Попытка удаление роли по коду которого нет в базе заканчивается ошибкой"{
-            val e = shouldThrow<HttpClientResponseException> { roleClient.getRoleByCode("bad_code") }
+            val e = shouldThrow<HttpClientResponseException> {
+                roleClient.deleteRoleByCode("bad_code")
+            }
             e.status shouldBe HttpStatus.BAD_REQUEST
             e.message shouldBe "role not found"
         }
