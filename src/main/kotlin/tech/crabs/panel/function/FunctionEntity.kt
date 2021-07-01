@@ -1,4 +1,4 @@
-package tech.crabs.panel.permission
+package tech.crabs.panel.function
 
 import java.time.Clock
 import java.time.LocalDateTime
@@ -7,8 +7,8 @@ import javax.persistence.Id
 import javax.persistence.Table
 
 @Entity
-@Table(name = "permissions")
-data class PermissionEntity(
+@Table(name = "functions")
+data class FunctionEntity(
 
     @Id
     var code: String,
