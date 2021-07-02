@@ -2,6 +2,15 @@ micronaut:
   application:
     name: panel
 
+  server:
+    cors:
+      enabled: true
+    netty:
+      access-logger:
+        enabled: true
+        logger-name: http-access-logger
+        log-format: common
+
   router:
     static-resources:
       swagger:
