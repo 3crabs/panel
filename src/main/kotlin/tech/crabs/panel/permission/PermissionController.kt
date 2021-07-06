@@ -21,5 +21,6 @@ class PermissionController {
     fun addPermission(permission: PermissionCreate): PermissionInfo = permissionService.addPermission(permission)
 
     @Delete(value = "/{code}")
+    @Operation(summary = "Удаление разрешения")
     fun deletePermissionByCode(code: String): PermissionInfo = permissionService.deletePermissionByCode(code)
 }
