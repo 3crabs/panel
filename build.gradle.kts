@@ -6,7 +6,7 @@ plugins {
     id("org.jetbrains.kotlin.plugin.allopen") version "1.4.32"
 }
 
-version = "0.2"
+version = "0.3"
 group = "tech.crabs"
 
 val kotlinVersion = project.properties.get("kotlinVersion")
@@ -28,8 +28,8 @@ dependencies {
     implementation("io.micronaut:micronaut-runtime")
     implementation("io.micronaut.kotlin:micronaut-kotlin-runtime")
     implementation("javax.annotation:javax.annotation-api")
-    implementation("org.jetbrains.kotlin:kotlin-reflect:${kotlinVersion}")
-    implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8:${kotlinVersion}")
+    implementation("org.jetbrains.kotlin:kotlin-reflect:$kotlinVersion")
+    implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8:$kotlinVersion")
     runtimeOnly("ch.qos.logback:logback-classic")
     implementation("io.micronaut:micronaut-validation")
 
@@ -46,7 +46,6 @@ dependencies {
     kapt("io.micronaut.openapi:micronaut-openapi:2.3.1")
     implementation("io.swagger.core.v3:swagger-annotations")
 }
-
 
 application {
     mainClass.set("tech.crabs.panel.Application")
