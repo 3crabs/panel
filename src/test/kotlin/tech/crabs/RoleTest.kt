@@ -111,14 +111,14 @@ class RoleTest : StringSpec() {
             r.created.shouldNotBeNull()
         }
 
-        "Удаление роли code 1"{
+        "Удаление роли code 1" {
             val r = roleClient.deleteRoleByCode("code 1")
             r.name shouldBe "name 1 new"
             r.code shouldBe "code 1"
             r.created.shouldNotBeNull()
         }
 
-        "Попытка удаление роли по коду которого нет в базе заканчивается ошибкой"{
+        "Попытка удаление роли по коду которого нет в базе заканчивается ошибкой" {
             val e = shouldThrow<HttpClientResponseException> {
                 roleClient.deleteRoleByCode("bad_code")
             }
@@ -126,7 +126,7 @@ class RoleTest : StringSpec() {
             e.message shouldBe "role not found"
         }
 
-        "Получение списка ролей с 1 элементом"{
+        "Получение списка ролей с 1 элементом" {
             roleClient.getAllRoles().size shouldBe 1
         }
     }

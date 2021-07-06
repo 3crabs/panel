@@ -111,14 +111,14 @@ class FunctionTest : StringSpec() {
             f.created.shouldNotBeNull()
         }
 
-        "Удаление функциии code 1"{
+        "Удаление функциии code 1" {
             val f = functionClient.deleteFunctionByCode("code 1")
             f.name shouldBe "name 1 new"
             f.code shouldBe "code 1"
             f.created.shouldNotBeNull()
         }
 
-        "Попытка удаление функциии по коду которого нет в базе заканчивается ошибкой"{
+        "Попытка удаление функциии по коду которого нет в базе заканчивается ошибкой" {
             val e = shouldThrow<HttpClientResponseException> {
                 functionClient.deleteFunctionByCode("bad_code")
             }
@@ -126,7 +126,7 @@ class FunctionTest : StringSpec() {
             e.message shouldBe "function not found"
         }
 
-        "Получение списка функциий с 1 элементом"{
+        "Получение списка функциий с 1 элементом" {
             functionClient.getAllFunctions().size shouldBe 1
         }
     }
