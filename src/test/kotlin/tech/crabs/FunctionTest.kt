@@ -29,17 +29,17 @@ class FunctionTest : StringSpec() {
         }
 
         "Создание функциии code 1" {
-            val p = functionClient.createFunction(FunctionCreate(" code 1 ", " name 1 "))
-            p.name shouldBe "name 1"
-            p.code shouldBe "code 1"
-            p.created.shouldNotBeNull()
+            val f = functionClient.createFunction(FunctionCreate(" code 1 ", " name 1 "))
+            f.name shouldBe "name 1"
+            f.code shouldBe "code 1"
+            f.created.shouldNotBeNull()
         }
 
         "Создание функциии code 2" {
-            val r = functionClient.createFunction(FunctionCreate(" code 2 ", " name 2 "))
-            r.name shouldBe "name 2"
-            r.code shouldBe "code 2"
-            r.created.shouldNotBeNull()
+            val f = functionClient.createFunction(FunctionCreate(" code 2 ", " name 2 "))
+            f.name shouldBe "name 2"
+            f.code shouldBe "code 2"
+            f.created.shouldNotBeNull()
         }
 
         "Попытка создание функциии с кодом который уже существует заканчивается ошибкой" {
@@ -63,10 +63,10 @@ class FunctionTest : StringSpec() {
         }
 
         "Получение функциии по коду" {
-            val p = functionClient.getFunctionByCode("code 1")
-            p.name shouldBe "name 1"
-            p.code shouldBe "code 1"
-            p.created.shouldNotBeNull()
+            val f = functionClient.getFunctionByCode("code 1")
+            f.name shouldBe "name 1"
+            f.code shouldBe "code 1"
+            f.created.shouldNotBeNull()
         }
 
         "Попытка получение функциии по коду которого нет в базе заканчивается ошибкой" {
@@ -78,14 +78,14 @@ class FunctionTest : StringSpec() {
         }
 
         "Редактирование функциии" {
-            var p = functionClient.updateFunction("code 1", FunctionUpdate(" name 1 new "))
-            p.name shouldBe "name 1 new"
-            p.code shouldBe "code 1"
-            p.created.shouldNotBeNull()
-            p = functionClient.getFunctionByCode("code 1")
-            p.name shouldBe "name 1 new"
-            p.code shouldBe "code 1"
-            p.created.shouldNotBeNull()
+            var f = functionClient.updateFunction("code 1", FunctionUpdate(" name 1 new "))
+            f.name shouldBe "name 1 new"
+            f.code shouldBe "code 1"
+            f.created.shouldNotBeNull()
+            f = functionClient.getFunctionByCode("code 1")
+            f.name shouldBe "name 1 new"
+            f.code shouldBe "code 1"
+            f.created.shouldNotBeNull()
         }
 
         "Попытка редактирования функциии по коду которого нет в базе заканчивается ошибкой" {
@@ -105,17 +105,17 @@ class FunctionTest : StringSpec() {
         }
 
         "Присвоение функциии своего же имени" {
-            val p = functionClient.updateFunction("code 2", FunctionUpdate(" name 2 "))
-            p.name shouldBe "name 2"
-            p.code shouldBe "code 2"
-            p.created.shouldNotBeNull()
+            val f = functionClient.updateFunction("code 2", FunctionUpdate(" name 2 "))
+            f.name shouldBe "name 2"
+            f.code shouldBe "code 2"
+            f.created.shouldNotBeNull()
         }
 
         "Удаление функциии code 1"{
-            val p = functionClient.deleteFunctionByCode("code 1")
-            p.name shouldBe "name 1 new"
-            p.code shouldBe "code 1"
-            p.created.shouldNotBeNull()
+            val f = functionClient.deleteFunctionByCode("code 1")
+            f.name shouldBe "name 1 new"
+            f.code shouldBe "code 1"
+            f.created.shouldNotBeNull()
         }
 
         "Попытка удаление функциии по коду которого нет в базе заканчивается ошибкой"{

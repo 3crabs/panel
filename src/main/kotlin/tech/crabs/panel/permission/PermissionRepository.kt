@@ -5,4 +5,7 @@ import io.micronaut.data.model.query.builder.sql.Dialect
 import io.micronaut.data.repository.CrudRepository
 
 @JdbcRepository(dialect = Dialect.H2)
-interface PermissionRepository : CrudRepository<PermissionEntity, String>
+interface PermissionRepository : CrudRepository<PermissionEntity, String> {
+
+    fun findByCode(code: String): PermissionEntity?
+}

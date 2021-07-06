@@ -12,14 +12,14 @@ data class PermissionInfo(
     val code: String,
 
     /**
-     * идентификатор функции разрешения
+     * код функциии
      */
-    val functionId: String,
+    val functionCode: String,
 
     /**
-     * идентификатор роли разрешения
+     * код роли
      */
-    val roleId: String,
+    val roleCode: String,
 
     /**
      * время и дата создания разрешения
