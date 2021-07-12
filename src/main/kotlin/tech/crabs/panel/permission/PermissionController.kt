@@ -14,13 +14,13 @@ class PermissionController {
 
     @Get
     @Operation(summary = "Получение разрешений")
-    fun getAllPermissions(): List<PermissionInfo> = permissionService.getAllPermissions()
+    fun getAllPermissions() = permissionService.getAllPermissions()
 
     @Post
     @Operation(summary = "Создание разрешения")
-    fun addPermission(permission: PermissionCreate): PermissionInfo = permissionService.addPermission(permission)
+    fun addPermission(permission: PermissionCreate) = permissionService.addPermission(permission)
 
     @Delete(value = "/{code}")
     @Operation(summary = "Удаление разрешения")
-    fun deletePermissionByCode(code: String): PermissionInfo = permissionService.deletePermissionByCode(code)
+    fun deletePermissionByCode(code: String) = permissionService.deletePermissionByCode(code)
 }
