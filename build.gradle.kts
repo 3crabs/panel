@@ -6,7 +6,7 @@ plugins {
     id("org.jetbrains.kotlin.plugin.allopen") version "1.4.32"
 }
 
-version = "0.3"
+version = "0.4"
 group = "tech.crabs"
 
 val kotlinVersion = project.properties.get("kotlinVersion")
