@@ -22,7 +22,10 @@ class PermissionService {
     @Inject
     lateinit var permissionConverter: PermissionConverter
 
-    fun getAllPermissions(): List<PermissionInfo> {
+    fun getAllPermissions(roleCode: String?): List<PermissionInfo> {
+        roleCode?.let { code ->
+            return permissionRepository.findAllByRoleCode(code).map { permissionConverter.convert(it) }
+        }
         return permissionRepository.findAll().map { permissionConverter.convert(it) }
     }
 

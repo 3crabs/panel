@@ -8,4 +8,6 @@ import io.micronaut.data.repository.CrudRepository
 interface PermissionRepository : CrudRepository<PermissionEntity, String> {
 
     fun findByCode(code: String): PermissionEntity?
+
+    fun findAllByRoleCode(roleCode: String): List<PermissionEntity>
 }

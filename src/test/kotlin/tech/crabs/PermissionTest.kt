@@ -59,6 +59,14 @@ class PermissionTest : StringSpec() {
             permissionClient.getAllPermissions().size shouldBe 1
         }
 
+        "Получение своих разрешений" {
+            permissionClient.getAllPermissions("role_code").size shouldBe 1
+        }
+
+        "Получение не своих разрешений" {
+            permissionClient.getAllPermissions("bad_role_code").size shouldBe 0
+        }
+
         "Удаление разрешения по коду" {
             val p = permissionClient.deletePermissionByCode("role_code__function_code")
             p.code shouldBe "role_code__function_code"

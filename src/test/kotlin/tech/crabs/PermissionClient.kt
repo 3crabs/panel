@@ -10,8 +10,8 @@ import tech.crabs.panel.permission.PermissionInfo
 @Client(value = "/permissions")
 interface PermissionClient {
 
-    @Get
-    fun getAllPermissions(): List<PermissionInfo>
+    @Get(value = "{?roleCode}")
+    fun getAllPermissions(roleCode: String? = null): List<PermissionInfo>
 
     @Post
     fun addPermission(permission: PermissionCreate): PermissionInfo
