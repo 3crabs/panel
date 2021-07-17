@@ -20,4 +20,11 @@ class PermissionConverter {
         o.roleCode,
         LocalDateTime.now(Clock.systemUTC())
     )
+
+    fun convert(o: PermissionInfo) = PermissionEntity(
+        o.roleCode + "__" + o.functionCode,
+        o.functionCode,
+        o.roleCode,
+        LocalDateTime.now(Clock.systemUTC())
+    )
 }

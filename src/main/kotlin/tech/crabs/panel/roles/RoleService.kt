@@ -16,10 +16,14 @@ class RoleService {
 
     fun getAllRoles() = roleRepository.findAll().map { roleConverter.convert(it) }
 
-    fun createRole(role: RoleCreate): RoleInfo {
+    fun addRole(role: RoleCreate): RoleInfo {
         roleRepository.findByCode(role.code.trim())?.let { throw badRequest("code is already in use") }
         roleRepository.findByName(role.name.trim())?.let { throw badRequest("name is already in use") }
         return roleConverter.convert(roleRepository.save(roleConverter.convert(role)))
+    }
+
+    fun addRoles(roles: List<RoleInfo>): List<RoleInfo> {
+        return roleRepository.saveAll(roles.map { roleConverter.convert(it) }).map { roleConverter.convert(it) }
     }
 
     fun getRoleByCode(code: String): RoleInfo {
@@ -39,6 +43,10 @@ class RoleService {
         val r = roleRepository.findByCode(code) ?: throw badRequest("role not found")
         roleRepository.delete(r)
         return roleConverter.convert(r)
+    }
+
+    fun deleteAllRoles() {
+        roleRepository.deleteAll()
     }
 
     private fun badRequest(message: String) = HttpStatusException(HttpStatus.BAD_REQUEST, message)

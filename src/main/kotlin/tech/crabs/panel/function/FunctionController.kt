@@ -18,7 +18,7 @@ class FunctionController {
 
     @Post
     @Operation(summary = "Создание функциии")
-    fun createFunction(function: FunctionCreate) = functionService.createFunction(function)
+    fun addFunction(function: FunctionCreate) = functionService.addFunction(function)
 
     @Get(value = "/{code}")
     @Operation(summary = "Получение функциии по коду")

@@ -20,4 +20,11 @@ class MakerConverter {
         o.roleCodeWhom,
         LocalDateTime.now(Clock.systemUTC())
     )
+
+    fun convert(o: MakerInfo) = MakerEntity(
+        o.roleCodeWho + "__" + o.roleCodeWhom,
+        o.roleCodeWho,
+        o.roleCodeWhom,
+        LocalDateTime.now(Clock.systemUTC())
+    )
 }

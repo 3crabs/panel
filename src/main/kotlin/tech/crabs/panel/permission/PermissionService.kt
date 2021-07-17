@@ -22,7 +22,7 @@ class PermissionService {
     @Inject
     lateinit var permissionConverter: PermissionConverter
 
-    fun getAllPermissions(roleCode: String?): List<PermissionInfo> {
+    fun getAllPermissions(roleCode: String? = null): List<PermissionInfo> {
         roleCode?.let { code ->
             return permissionRepository.findAllByRoleCode(code).map { permissionConverter.convert(it) }
         }
@@ -35,10 +35,19 @@ class PermissionService {
         return permissionConverter.convert(permissionRepository.save(permissionConverter.convert(permission)))
     }
 
+    fun addPermissions(permissions: List<PermissionInfo>): List<PermissionInfo> {
+        return permissionRepository.saveAll(permissions.map { permissionConverter.convert(it) })
+            .map { permissionConverter.convert(it) }
+    }
+
     fun deletePermissionByCode(code: String): PermissionInfo {
         val p = permissionRepository.findByCode(code) ?: throw badRequest("permission not found")
         permissionRepository.delete(p)
         return permissionConverter.convert(p)
+    }
+
+    fun deleteAllPermissions() {
+        permissionRepository.deleteAll()
     }
 
     private fun badRequest(message: String) = HttpStatusException(HttpStatus.BAD_REQUEST, message)

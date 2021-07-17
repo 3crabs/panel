@@ -17,10 +17,15 @@ class FunctionService {
     fun getAllFunctions(): List<FunctionInfo> =
         functionRepository.findAll().map { functionConverter.convert(it) }
 
-    fun createFunction(function: FunctionCreate): FunctionInfo {
+    fun addFunction(function: FunctionCreate): FunctionInfo {
         functionRepository.findByCode(function.code.trim())?.let { throw badRequest("code is already in use") }
         functionRepository.findByName(function.name.trim())?.let { throw badRequest("name is already in use") }
         return functionConverter.convert(functionRepository.save(functionConverter.convert(function)))
+    }
+
+    fun addFunctions(functions: List<FunctionInfo>): List<FunctionInfo> {
+        return functionRepository.saveAll(functions.map { functionConverter.convert(it) })
+            .map { functionConverter.convert(it) }
     }
 
     fun getFunctionByCode(code: String): FunctionInfo {
@@ -40,6 +45,10 @@ class FunctionService {
         val r = functionRepository.findByCode(code) ?: throw badRequest("function not found")
         functionRepository.delete(r)
         return functionConverter.convert(r)
+    }
+
+    fun deleteAllFunctions() {
+        functionRepository.deleteAll()
     }
 
     private fun badRequest(message: String) = HttpStatusException(HttpStatus.BAD_REQUEST, message)

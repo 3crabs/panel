@@ -28,10 +28,18 @@ class MakerService {
         return makerConverter.convert(makerRepository.save(makerConverter.convert(maker)))
     }
 
+    fun addMakers(makers: List<MakerInfo>): List<MakerInfo> {
+        return makerRepository.saveAll(makers.map { makerConverter.convert(it) }).map { makerConverter.convert(it) }
+    }
+
     fun deleteMakerByCode(code: String): MakerInfo {
         val p = makerRepository.findByCode(code) ?: throw badRequest("marker not found")
         makerRepository.delete(p)
         return makerConverter.convert(p)
+    }
+
+    fun deleteAllMarkers() {
+        makerRepository.deleteAll()
     }
 
     private fun badRequest(message: String) = HttpStatusException(HttpStatus.BAD_REQUEST, message)

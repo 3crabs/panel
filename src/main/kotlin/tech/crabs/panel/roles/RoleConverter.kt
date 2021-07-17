@@ -7,15 +7,21 @@ import javax.inject.Singleton
 @Singleton
 class RoleConverter {
 
+    fun convert(o: RoleEntity) = RoleInfo(
+        o.code,
+        o.name,
+        o.created
+    )
+
     fun convert(o: RoleCreate) = RoleEntity(
         o.code.trim(),
         o.name.trim(),
         LocalDateTime.now(Clock.systemUTC())
     )
 
-    fun convert(o: RoleEntity) = RoleInfo(
-        o.code,
-        o.name,
-        o.created
+    fun convert(o: RoleInfo) = RoleEntity(
+        o.code.trim(),
+        o.name.trim(),
+        LocalDateTime.now(Clock.systemUTC())
     )
 }

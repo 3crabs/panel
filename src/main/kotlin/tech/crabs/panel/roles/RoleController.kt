@@ -18,7 +18,7 @@ class RoleController {
 
     @Post
     @Operation(summary = "Создание роли")
-    fun createRole(role: RoleCreate) = roleService.createRole(role)
+    fun addRole(role: RoleCreate) = roleService.addRole(role)
 
     @Get(value = "/{code}")
     @Operation(summary = "Получение роли по коду")
