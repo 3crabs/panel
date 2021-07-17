@@ -15,10 +15,10 @@ class DataController {
     lateinit var dataService: DataService
 
     @Get
-    @Operation(summary = "Получение функций")
+    @Operation(summary = "Получение информации")
     fun getData() = dataService.getData()
 
     @Post
-    @Operation(summary = "Создание функциии")
+    @Operation(summary = "Загрузка информации")
     fun loadData(data: Data) = dataService.loadData(data)
 }
