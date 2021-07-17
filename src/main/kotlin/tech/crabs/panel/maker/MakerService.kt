@@ -29,6 +29,9 @@ class MakerService {
     }
 
     fun addMakers(makers: List<MakerInfo>): List<MakerInfo> {
+        if (makers.isEmpty()) {
+            return emptyList()
+        }
         return makerRepository.saveAll(makers.map { makerConverter.convert(it) }).map { makerConverter.convert(it) }
     }
 

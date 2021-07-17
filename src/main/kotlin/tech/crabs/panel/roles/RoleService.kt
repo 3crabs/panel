@@ -23,6 +23,9 @@ class RoleService {
     }
 
     fun addRoles(roles: List<RoleInfo>): List<RoleInfo> {
+        if (roles.isEmpty()) {
+            return emptyList()
+        }
         return roleRepository.saveAll(roles.map { roleConverter.convert(it) }).map { roleConverter.convert(it) }
     }
 

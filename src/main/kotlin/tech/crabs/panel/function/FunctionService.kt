@@ -24,6 +24,9 @@ class FunctionService {
     }
 
     fun addFunctions(functions: List<FunctionInfo>): List<FunctionInfo> {
+        if (functions.isEmpty()) {
+            return emptyList()
+        }
         return functionRepository.saveAll(functions.map { functionConverter.convert(it) })
             .map { functionConverter.convert(it) }
     }

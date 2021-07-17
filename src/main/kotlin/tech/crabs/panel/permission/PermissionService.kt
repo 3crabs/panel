@@ -36,6 +36,9 @@ class PermissionService {
     }
 
     fun addPermissions(permissions: List<PermissionInfo>): List<PermissionInfo> {
+        if (permissions.isEmpty()) {
+            return emptyList()
+        }
         return permissionRepository.saveAll(permissions.map { permissionConverter.convert(it) })
             .map { permissionConverter.convert(it) }
     }
